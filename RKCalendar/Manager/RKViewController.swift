@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct RKViewController: View {
+public struct RKViewController: View {
     
     @Binding var isPresented: Bool
     

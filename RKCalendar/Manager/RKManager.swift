@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-class RKManager : ObservableObject {
+public class RKManager : ObservableObject {
 
     @Published var calendar = Calendar.current
     @Published var minimumDate: Date = Date()
@@ -23,7 +23,7 @@ class RKManager : ObservableObject {
     
     var colors = RKColorSettings()
   
-    init(calendar: Calendar, minimumDate: Date, maximumDate: Date, selectedDates: [Date] = [Date](), mode: Int) {
+    public init(calendar: Calendar, minimumDate: Date, maximumDate: Date, selectedDates: [Date] = [Date](), mode: Int) {
         self.calendar = calendar
         self.minimumDate = minimumDate
         self.maximumDate = maximumDate
@@ -31,25 +31,25 @@ class RKManager : ObservableObject {
         self.mode = mode
     }
     
-    func selectedDatesContains(date: Date) -> Bool {
+    public func selectedDatesContains(date: Date) -> Bool {
         if let _ = self.selectedDates.first(where: { calendar.isDate($0, inSameDayAs: date) }) {
             return true
         }
         return false
     }
     
-    func selectedDatesFindIndex(date: Date) -> Int? {
+    public func selectedDatesFindIndex(date: Date) -> Int? {
         return self.selectedDates.firstIndex(where: { calendar.isDate($0, inSameDayAs: date) })
     }
     
-    func disabledDatesContains(date: Date) -> Bool {
+    public func disabledDatesContains(date: Date) -> Bool {
         if let _ = self.disabledDates.first(where: { calendar.isDate($0, inSameDayAs: date) }) {
             return true
         }
         return false
     }
     
-    func disabledDatesFindIndex(date: Date) -> Int? {
+    public func disabledDatesFindIndex(date: Date) -> Int? {
         return self.disabledDates.firstIndex(where: { calendar.isDate($0, inSameDayAs: date) })
     }
     
