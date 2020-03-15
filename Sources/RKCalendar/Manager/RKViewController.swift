@@ -14,6 +14,11 @@ public struct RKViewController: View {
     
     @ObservedObject var rkManager: RKManager
     
+    public init(isPresented: Binding<Bool>, rkManager: ObservedObject<RKManager>) {
+        self._isPresented = isPresented
+        self._rkManager = rkManager
+    }
+    
     public var body: some View {
         Group {
             RKWeekdayHeader(rkManager: self.rkManager)
@@ -42,11 +47,16 @@ public struct RKViewController: View {
 
 #if DEBUG
 struct RKViewController_Previews : PreviewProvider {
+    static let rkManager1 = ObservedObject(wrappedValue: RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*365), mode: 0))
+    
+    static let rkManager2 = ObservedObject(wrappedValue: RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*32), mode: 0))
+        
     static var previews: some View {
-        Group {
-            RKViewController(isPresented: .constant(false), rkManager: RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*365), mode: 0))
-            RKViewController(isPresented: .constant(false), rkManager: RKManager(calendar: Calendar.current, minimumDate: Date(), maximumDate: Date().addingTimeInterval(60*60*24*32), mode: 0))
-                .environment(\.colorScheme, .dark)
+        VStack {
+            RKViewController(isPresented: .constant(false),
+                             rkManager: rkManager1)
+            
+            RKViewController(isPresented: .constant(false), rkManager: rkManager2).environment(\.colorScheme, .dark)
                 .environment(\.layoutDirection, .rightToLeft)
         }
     }
