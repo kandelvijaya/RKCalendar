@@ -14,7 +14,7 @@ public struct RKViewController: View {
     
     @ObservedObject var rkManager: RKManager
     
-    var body: some View {
+    public var body: some View {
         Group {
             RKWeekdayHeader(rkManager: self.rkManager)
             Divider()
