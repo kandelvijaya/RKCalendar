@@ -45,7 +45,7 @@ struct RKMonth: View {
                                         isBetweenStartAndEnd: self.isBetweenStartAndEnd(date: column)),
                                         cellWidth: self.cellWidth)
                                         .onTapGesture { self.dateTapped(date: column) }
-                                        .disabled( self.rkManager.isDateEnabledForSelection(column))
+                                        .disabled(!self.rkManager.isDateEnabledForSelection(column))
                                         .opacity( self.rkManager.isDateEnabledForSelection(column) ? 1.0 : 0.5)
                                 } else {
                                     Text("").frame(width: self.cellWidth, height: self.cellWidth)
